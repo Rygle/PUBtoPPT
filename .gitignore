@@ -1,0 +1,26 @@
+# Converter output (regenerate with: uv run pub2pptx.py *.pub)
+*.pptx
+*.raw.txt
+
+# Python / uv
+__pycache__/
+*.py[cod]
+.venv/
+.python-version
+uv.lock
+.ruff_cache/
+.mypy_cache/
+.pytest_cache/
+
+# Editors and OS
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Office lock files (created while a file is open)
+~$*
+.~lock.*#
