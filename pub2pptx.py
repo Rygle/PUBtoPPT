@@ -582,6 +582,23 @@ class Renderer:
         first = doc.pages[0].props if doc.pages else {}
         self.page_w = length(first.get("svg:width"), 11.6929) or 11.6929
         self.page_h = length(first.get("svg:height"), 8.2677) or 8.2677
+      
+        # PowerPoint slide dimension limits (in inches)
+        MIN_INCHES = 1.0
+        MAX_INCHES = 56.0
+
+        # Scale down if too large
+        if self.page_w > MAX_INCHES or self.page_h > MAX_INCHES:
+            scale = min(MAX_INCHES / self.page_w, MAX_INCHES / self.page_h)
+            self.page_w *= scale
+            self.page_h *= scale
+
+        # Scale up if too small
+        if self.page_w < MIN_INCHES or self.page_h < MIN_INCHES:
+            scale = max(MIN_INCHES / self.page_w, MIN_INCHES / self.page_h)
+            self.page_w *= scale
+            self.page_h *= scale
+      
         self.prs.slide_width = emu(self.page_w)
         self.prs.slide_height = emu(self.page_h)
         self._blank = self.prs.slide_layouts[6]
